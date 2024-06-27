@@ -1,12 +1,12 @@
 ### How to use?
 + Add lzrlgl.jar to depencies/put into a one dir with lazurite interpreter
 + type
-```lua
+```cpp
 using "reflection"
 JUpload("lzrlgl.jar", "com.monsler.lzrlgl")
 ```
 or
-```lua
+```cpp
 using "lzrlgl.jar" "com.monsler.lzrlgl"
 ```
 + Now you can use the library in your code!
