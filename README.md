@@ -12,11 +12,9 @@ using "lzrlgl.jar" "com.monsler.lzrlgl"
 + Now you can use the library in your code!
 ### Example
 ```cpp
-using "reflection"
+using "lzrlgl" "com.monsler.lzrlgl"
 
-System = JClass("java.lang.System")
-JUpload("lzrlgl.jar", "com.monsler.lzrlgl")
-
+//JUpload("lzrlgl.jar", "com.monsler.lzrlgl")
 // GLFW initialization
 if (!glfw.init()) {
     print("Error initializing glfw")
@@ -41,15 +39,23 @@ glfw.setWindowPos(window, monitor.width/2-250, monitor.height/2-200)
 gl.createCapabilities()
 
 // Setup the dimensions of the window
-gl.matrixMode(gl.PROJECTION)
+gl.matrixMode(gl.MODELVIEW)
 gl.viewport(0, 0, 500, 400)
 gl.loadIdentity()
+
+glfw.setKeyCallback(window, func(window, key, scancode, action, mode) {
+    if (key == glfw.KEY_ESCAPE && action == glfw.RELEASE) {
+        glfw.setWindowShouldClose(window, true)
+    }
+})
+
 
 gl.frustum(-(500/400), (500/400), -1.0, 1.0, 2.0, 100.0)
 // Window loop
 while(!glfw.windowShouldClose(window)) {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
+    gl.rotatef(1f, 0f, 0f, 1f)
     gl.begin(gl.QUADS)
     gl.color3d(1, 0, 0)
     gl.vertex3f(-1f, -1f, -10f)
@@ -60,6 +66,7 @@ while(!glfw.windowShouldClose(window)) {
     gl.color3d(1, 1, 1)
     gl.vertex3f(-1f, 1f, -10f)
     gl.end()
+    //gl.popMatrix()
 
     glfw.swapBuffers(window)
     glfw.pollEvents()
