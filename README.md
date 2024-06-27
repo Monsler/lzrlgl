@@ -14,7 +14,6 @@ using "lzrlgl.jar" "com.monsler.lzrlgl"
 ```cpp
 using "lzrlgl" "com.monsler.lzrlgl"
 
-//JUpload("lzrlgl.jar", "com.monsler.lzrlgl")
 // GLFW initialization
 if (!glfw.init()) {
     print("Error initializing glfw")
