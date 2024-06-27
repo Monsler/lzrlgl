@@ -5,6 +5,10 @@
 using "reflection"
 JUpload("lzrlgl.jar", "com.monsler.lzrlgl")
 ```
+or
+```lua
+using "lzrlgl.jar" "com.monsler.lzrlgl"
+```
 + Now you can use the library in your code!
 ### Example
 ```cpp
