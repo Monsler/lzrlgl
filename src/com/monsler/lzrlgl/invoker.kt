@@ -4,18 +4,21 @@ import com.kingmang.lazurite.core.Arguments
 import com.kingmang.lazurite.core.Function
 import com.kingmang.lazurite.libraries.Library
 import com.kingmang.lazurite.runtime.Variables
+import com.kingmang.lazurite.runtime.values.LzrFunction
 import com.kingmang.lazurite.runtime.values.LzrMap
 import com.kingmang.lazurite.runtime.values.LzrNumber
 import com.kingmang.lazurite.runtime.values.LzrValue
 import org.lwjgl.glfw.Callbacks.glfwFreeCallbacks
+import org.lwjgl.glfw.GLFW
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.glfw.GLFWErrorCallback
+import org.lwjgl.glfw.GLFWKeyCallbackI
+import org.lwjgl.glfw.GLFWWindowCloseCallbackI
 import org.lwjgl.opengl.GL.createCapabilities
 import org.lwjgl.opengl.GL11.*
-import org.lwjgl.system.MemoryStack
+import java.awt.SystemColor.window
 import java.io.PrintStream
-import java.nio.IntBuffer
-import java.util.stream.Stream
+
 
 class invoker : Library {
     override fun init() {
@@ -127,6 +130,31 @@ class invoker : Library {
         glTable["QUADS"] = LzrNumber(GL_QUADS)
         glTable["COLOR_BUFFER_BIT"] = LzrNumber(GL_COLOR_BUFFER_BIT)
         glTable["DEPTH_BUFFER_BIT"] = LzrNumber(GL_DEPTH_BUFFER_BIT)
+        glfwTable["MAXIMIZED"] = LzrNumber(GLFW_MAXIMIZED)
+        glfwTable["DECORATED"] = LzrNumber(GLFW_DECORATED)
+        glTable["MODELVIEW"] = LzrNumber(GL_MODELVIEW)
+        glfwTable["pushMatrix"] = Function {
+            glPushMatrix()
+            LzrNumber.ONE
+        }
+        glfwTable["popMatrix"] = Function {
+            glPopMatrix()
+            LzrNumber.ONE
+        }
+        glTable["rotatef"] = Function { args ->
+            Arguments.check(4, args.size)
+            glRotatef(args[0].raw() as Float, args[1].raw() as Float, args[2].raw() as Float, args[3].raw() as Float)
+            LzrNumber.ONE
+        }
+        glTable["rotated"] = Function { args ->
+            Arguments.check(4, args.size)
+            glRotated(args[0].asNumber(), args[1].asNumber(), args[2].asNumber(), args[3].asNumber())
+            LzrNumber.ONE
+        }
+        glfwTable["popMatrix"] = Function {
+            glPopMatrix()
+            LzrNumber.ONE
+        }
         glTable["color3d"] = Function {args ->
             Arguments.check(3, args.size)
             glColor3d(args[0].asNumber(), args[1].asNumber(), args[2].asNumber())
@@ -216,15 +244,49 @@ class invoker : Library {
             glVertex4d(args[0].asNumber(), args[1].asNumber(), args[2].asNumber(), args[3].asNumber())
             LzrNumber.ONE
         }
-        glfwTable[""]
         val errorCallback = LzrMap(1)
         errorCallback["createPrint"] = Function { args ->
             GLFWErrorCallback.createPrint(args[0].raw()!! as PrintStream)
             LzrNumber.ZERO
         }
+        glfwTable["setKeyCallback"] = Function { args ->
+            Arguments.check(2, args.size)
+            glfwSetKeyCallback(args[0].raw() as Long) { window: Long, key: Int, scancode: Int, action: Int, mods: Int ->
+                (args[1] as LzrFunction).value.execute(
+                    LzrNumber(window),
+                    LzrNumber(key),
+                    LzrNumber(scancode),
+                    LzrNumber(action),
+                    LzrNumber(mods)
+                )
+            }
+            LzrNumber.MINUS_ONE
+        }
+        glfwTable["setWindowCloseCallback"] = Function { args ->
+            Arguments.check(2, args.size)
+            glfwSetWindowCloseCallback(args[0].raw() as Long) { window: Long ->
+                (args[1] as LzrFunction).value.execute(
+                    LzrNumber(window)
+                )
+            }
+            LzrNumber.ONE
+        }
+        glfwTable["setWindowShouldClose"] = Function { args ->
+            val win = args[0].raw() as Long
+            val `is` = args[1].asInt()
+            glfwSetWindowShouldClose(win, `is` == 1)
+            LzrNumber.ONE
+        }
+        setKeys(glfwTable)
 
         Variables.define("GLFWErrorCallback", errorCallback)
         Variables.define("glfw", glfwTable)
         Variables.define("gl", glTable)
+    }
+
+    private fun setKeys(t: LzrMap) {
+        t["KEY_ESCAPE"] = LzrNumber(GLFW_KEY_ESCAPE)
+        t["KEY_Q"] = LzrNumber(GLFW_KEY_Q)
+        t["RELEASE"] = LzrNumber(GLFW_RELEASE)
     }
 }
