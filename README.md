@@ -66,5 +66,6 @@ glfw.terminate()
 ```
 <br>
 Compiled result:<br>
+
 ![image](https://github.com/Monsler/lzrlgl/assets/105060825/03e61df5-041e-46fd-9a3c-dc1f7c6628c0)
 
