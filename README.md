@@ -7,12 +7,12 @@ JUpload("lzrlgl.jar", "com.monsler.lzrlgl")
 ```
 or
 ```cpp
-using "lzrlgl.jar" "com.monsler.lzrlgl"
+using "lzrlgl.jar::com.monsler.lzrlgl"
 ```
 + Now you can use the library in your code!
 ### Example
 ```cpp
-using "lzrlgl" "com.monsler.lzrlgl"
+using "lzrlgl::com.monsler.lzrlgl"
 
 // GLFW initialization
 if (!glfw.init()) {
