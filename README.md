@@ -1,5 +1,5 @@
 ### How to use?
-+ Add lzrlgl.jar to depencies/put into a one dir with lazurite interpreter
++ Add lzrlgl.jar to dependencies/put into a one dir with lazurite interpreter
 + type
 ```cpp
 using "reflection"
