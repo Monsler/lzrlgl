@@ -8,6 +8,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
-    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="lwjgl-assimp-natives-linux" level="project" />
+    <orderEntry type="library" name="Lazurite" level="project" />
   </component>
 </module>

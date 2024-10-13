@@ -7,16 +7,11 @@ import com.kingmang.lazurite.runtime.Variables
 import com.kingmang.lazurite.runtime.values.LzrFunction
 import com.kingmang.lazurite.runtime.values.LzrMap
 import com.kingmang.lazurite.runtime.values.LzrNumber
-import com.kingmang.lazurite.runtime.values.LzrValue
 import org.lwjgl.glfw.Callbacks.glfwFreeCallbacks
-import org.lwjgl.glfw.GLFW
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.glfw.GLFWErrorCallback
-import org.lwjgl.glfw.GLFWKeyCallbackI
-import org.lwjgl.glfw.GLFWWindowCloseCallbackI
 import org.lwjgl.opengl.GL.createCapabilities
 import org.lwjgl.opengl.GL11.*
-import java.awt.SystemColor.window
 import java.io.PrintStream
 
 
@@ -287,6 +282,31 @@ class invoker : Library {
     private fun setKeys(t: LzrMap) {
         t["KEY_ESCAPE"] = LzrNumber(GLFW_KEY_ESCAPE)
         t["KEY_Q"] = LzrNumber(GLFW_KEY_Q)
+        t["KEY_A"] = LzrNumber(GLFW_KEY_A)
+        t["KEY_B"] = LzrNumber(GLFW_KEY_B)
+        t["KEY_C"] = LzrNumber(GLFW_KEY_C)
+        t["KEY_D"] = LzrNumber(GLFW_KEY_D)
+        t["KEY_E"] = LzrNumber(GLFW_KEY_E)
+        t["KEY_F"] = LzrNumber(GLFW_KEY_F)
+        t["KEY_G"] = LzrNumber(GLFW_KEY_G)
+        t["KEY_H"] = LzrNumber(GLFW_KEY_H)
+        t["KEY_I"] = LzrNumber(GLFW_KEY_I)
+        t["KEY_J"] = LzrNumber(GLFW_KEY_J)
+        t["KEY_K"] = LzrNumber(GLFW_KEY_K)
+        t["KEY_L"] = LzrNumber(GLFW_KEY_L)
+        t["KEY_M"] = LzrNumber(GLFW_KEY_M)
+        t["KEY_N"] = LzrNumber(GLFW_KEY_N)
+        t["KEY_O"] = LzrNumber(GLFW_KEY_O)
+        t["KEY_P"] = LzrNumber(GLFW_KEY_P)
+        t["KEY_R"] = LzrNumber(GLFW_KEY_R)
+        t["KEY_S"] = LzrNumber(GLFW_KEY_S)
+        t["KEY_T"] = LzrNumber(GLFW_KEY_T)
+        t["KEY_U"] = LzrNumber(GLFW_KEY_U)
+        t["KEY_V"] = LzrNumber(GLFW_KEY_V)
+        t["KEY_W"] = LzrNumber(GLFW_KEY_W)
+        t["KEY_X"] = LzrNumber(GLFW_KEY_X)
+        t["KEY_Y"] = LzrNumber(GLFW_KEY_Y)
+        t["KEY_Z"] = LzrNumber(GLFW_KEY_Z)
         t["RELEASE"] = LzrNumber(GLFW_RELEASE)
     }
 }
